@@ -37,6 +37,8 @@ SHORTCUT_FILTERS=${TODOFI_SHORTCUT_FILTERS:-"Alt+p"}
 SHORTCUT_CLEAR=${TODOFI_SHORTCUT_CLEAR:-"Alt+c"}
 SHORTCUT_HELP=${TODOFI_SHORTCUT_HELP:-"Alt+h"}
 
+TODOTXT_DO=${TODOFI_CMD_DO:-"do"}
+
 EDITOR='gedit'
 
 ROFI_BIN="$(command -v rofi)"
@@ -217,7 +219,7 @@ option() {
 
             case "${selection:0:1}" in
               "1")
-                confirm "mark as done" "$current_line" && runtodo do $lineno && break;;
+                confirm "mark as done" "$current_line" && runtodo $TODOTXT_DO $lineno && break;;
               "2")
                 edit $lineno "$current_line" && break;;
               "3")
@@ -420,7 +422,7 @@ main() {
         elif [[ $val -eq 12 ]]; then
             edit $lineno "$selection"
         elif [[ $val -eq 11 ]]; then
-            confirm "mark as done" "$selection" && runtodo do "$lineno"
+            confirm "mark as done" "$selection" && runtodo $TODOTXT_DO "$lineno"
         elif [[ $val -eq 17 ]]; then
             termfilter
         elif [[ $val -eq 13 ]]; then
